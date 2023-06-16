@@ -82,6 +82,41 @@ An example of loading the object 'left_gear' on to the table is as below :
      $ python render.py <custom_model> 
     ~~~
 
+## Docker
+
+Prerequisites: 
+[Docker](https://docs.docker.com/engine/install/ubuntu/), 
+[NVIDIA Contanier Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html), 
+[OSRF Rocker ](https://github.com/osrf/rocker)
+
+### Build
+```
+docker build -t gazebo-dataset-generation .
+```
+
+### Execute
+```
+rocker --x11 --nvidia --name gazebo-dataset-generation gazebo-dataset-generation
+```
+
+Run in container
+```
+source /catkin_ws/devel/setup.bash
+roslaunch data_generation metrics.launch
+```
+
+### Second terminal
+```
+docker exec -it gazebo-dataset-generation /bin/bash
+```
+
+Run in container
+```
+source /catkin_ws/devel/setup.bash
+cd /catkin_ws/src/gazebo_dataset_generation
+python3 render.py bottom_casing left_gear 
+```
+
 ## Acknowledgement
 
 Project funding was received from European Union's Horizon 2020 research and innovation programme, grant agreement no. 871252 (METRICS) and no. 871449 (OpenDR), and from Helsinki Institute of Physics' Technology Programme (project; ROBOT). The authors wish to acknowledge CSC - IT Center for Science, Finland, for computational resources.
